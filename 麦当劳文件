@@ -9,7 +9,17 @@
 //完成了最初的界面，并且实现了点击按钮变色之后进入订餐界面
 
 
-//
+
+
+
+//潘凯翔：完成了  startUI 函数   ，主要是开始界面以及按钮函数的功能
+//潘凯翔：
+
+
+
+
+
+
 
 
 
@@ -20,8 +30,13 @@
 IMAGE imbg;        //点餐界面的背景图片
 IMAGE backButton;  //返回的按钮图片
 IMAGE SinglePic;   //单品的按钮图片
+IMAGE SinglePic_;   //单品的按钮图片2
 IMAGE TotalPic;    //套餐的按钮图片
+IMAGE TotalPic2;
 int Enterin = 1;
+
+
+
 
 
 
@@ -39,8 +54,12 @@ void startUI() {
 
 	int flag = 0;
 	while (1) {
-		BeginBatchDraw();
-		putimage(0, 0, &imgBackPic);
+		BeginBatchDraw();    //在内存中绘制所有界面，然后最后再输出出来
+
+
+		putimage(0, 0, &imgBackPic);    //
+
+
 		putimage(170, 700, flag ? &button : &button_);
 		ExMessage msg;
 		if (peekmessage(&msg)) {
@@ -61,24 +80,47 @@ void startUI() {
 }
 
 
-void gameInitGround() {
-	loadimage(&SinglePic, "res/single1");
+
+
+
+void gameInitGround() {   //
+	loadimage(&SinglePic, "res/single1.jpg");  //导入单品的图片
+
+	loadimage(&TotalPic, "res/Total.jpg");   //导入套餐的图片
 	//loadimage(&TotalPic, "res/");
-	loadimage(&imbg, "res/backimg.jpg");
+	loadimage(&imbg, "res/backimg.jpg");    //导入背景的图片
 
 	initgraph(WIN_WIDTH, WIN_HEIGHT, SHOWCONSOLE | NOCLOSE);//两个参数，窗口长度宽度；
 
+
 }
+
+
 
 void updateWindow() {
 	BeginBatchDraw();
 	
+	int flag = 0;
+
+
 	putimage(0, 0, &imbg);
-	putimage(0, 135, &SinglePic);
-	//putimage();
+	putimage(0, 135,  &SinglePic);
+	putimage(0, 135 + 89, &TotalPic);
+
+
+
 	ExMessage msg;
 	//if()
-
+	// 输出字符（MBCS 字符集）
+	
+	// 设置输出效果为抗锯齿 (VC6 / VC2008 / VC2010 / VC2012)
+	//LOGFONT f;
+	//gettextstyle(&f);						// 获取当前字体设置
+	//f.lfHeight = 48;						// 设置字体高度为 48
+	//strcpy(f.lfFaceName, _T("黑体"));		// 设置字体为“黑体”(高版本 VC 推荐使用 _tcscpy_s 函数)
+	//f.lfQuality = ANTIALIASED_QUALITY;		// 设置输出效果为抗锯齿  
+	//settextstyle(&f);						// 设置字体样式
+	//outtextxy(0, 50, _T("抗锯齿效果"));
 
 
 
@@ -97,7 +139,7 @@ int main(void) {
 
 	while (1  && Enterin == 1) {
 
-
+		   
           updateWindow();
 
 	}
