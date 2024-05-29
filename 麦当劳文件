@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<graphics.h>
+#include<time.h>
+#define WIN_WIDTH 540
+#define WIN_HEIGHT 960//定义俩个宏变量
+
+
+
+//完成了最初的界面，并且实现了点击按钮变色之后进入订餐界面
+
+
+//
+
+
+
+
+
+
+
+IMAGE imbg;        //点餐界面的背景图片
+IMAGE backButton;  //返回的按钮图片
+IMAGE SinglePic;   //单品的按钮图片
+IMAGE TotalPic;    //套餐的按钮图片
+int Enterin = 1;
+
+
+
+
+void startUI() {
+	IMAGE imgBackPic;    //初始化图片界面的背景图片
+	IMAGE button;        //按钮的图片指针1
+	IMAGE button_;       //按钮的图片指针2
+
+	loadimage(&imgBackPic, "res/bg2.jpg");     //导入开始界面
+
+	loadimage(&button, "res/anniu.png");      //导入按钮图片
+
+	loadimage(&button_, "res/button_.png");   //导入按钮图片2
+
+	int flag = 0;
+	while (1) {
+		BeginBatchDraw();
+		putimage(0, 0, &imgBackPic);
+		putimage(170, 700, flag ? &button : &button_);
+		ExMessage msg;
+		if (peekmessage(&msg)) {
+			if (msg.message == WM_LBUTTONDOWN && msg.x > 170
+				&& msg.x < 170 + 212 && msg.y > 700 &&
+				msg.y < 700 + 61) {
+				flag = 1;
+			}
+			else if (msg.message == WM_LBUTTONUP) {
+				if (flag) {
+					return;    //结束游戏界面， 正式开始游戏
+				}
+			}
+		}
+		EndBatchDraw();   //展示内存中所绘画的模型
+	}
+
+}
+
+
+void gameInitGround() {
+	loadimage(&SinglePic, "res/single1");
+	//loadimage(&TotalPic, "res/");
+	loadimage(&imbg, "res/backimg.jpg");
+
+	initgraph(WIN_WIDTH, WIN_HEIGHT, SHOWCONSOLE | NOCLOSE);//两个参数，窗口长度宽度；
+
+}
+
+void updateWindow() {
+	BeginBatchDraw();
+	
+	putimage(0, 0, &imbg);
+	putimage(0, 135, &SinglePic);
+	//putimage();
+	ExMessage msg;
+	//if()
+
+
+
+
+	EndBatchDraw();
+}
+
+
+
+
+int main(void) {
+	gameInitGround();//读取各个图片的信息，
+
+	startUI();
+
+
+
+	while (1  && Enterin == 1) {
+
+
+          updateWindow();
+
+	}
+	
+
+	system("pause");
+	return 0;
+}
