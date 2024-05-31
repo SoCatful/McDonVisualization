@@ -11,7 +11,7 @@ typedef struct {
     int Time;//预测的完成时间，以秒为单位
 }Order;
 
-
+//注意：对于订单系统关闭后的订单，此函数仍然会忠实地输出它的完成时间
 
 void PredictCompTime(Order * AllOrders,int orderNum,int *FoodStored,int TIME,int *FoodMakingTime);
 //                       订单数组         截至此刻目前的总订单数 食物存量    当前时间
